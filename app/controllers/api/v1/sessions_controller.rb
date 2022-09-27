@@ -1,6 +1,6 @@
 class Api::V1::SessionsController < ApplicationController
   def create
-    user = User.find_by(username: params[:username])
+    user = User.find_by(email: params[:email])
 
     if user.nil?
       render(json: { message: "User does not exist. Please create an account." }, status: 401)

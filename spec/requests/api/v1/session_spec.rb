@@ -5,7 +5,7 @@ require 'rails_helper'
     describe 'happy path' do
       it 'successfully creates session and displays appropriate response' do
         user_params = {
-          "username": 'ben@ben.com',
+          "email": 'ben@ben.com',
           "password": "ben123",
           "password_confirmation": "ben123",
           "api_key": "key123"
@@ -14,7 +14,7 @@ require 'rails_helper'
 
         headers = { 'Content-Type' => 'application/json' }
         session_params = {
-          "username": 'ben@ben.com',
+          "email": 'ben@ben.com',
           "password": "ben123",
         }
         post api_v1_sessions_path, headers: headers, params: session_params.to_json
@@ -32,8 +32,8 @@ require 'rails_helper'
         expect(parsed_response[:data][:type]).to eq('users')
         expect(parsed_response[:data][:attributes]).to be_a(Hash)
 
-        expect(parsed_response[:data][:attributes].keys).to eq(%i[username api_key])
-        expect(parsed_response[:data][:attributes][:username]).to be_a(String)
+        expect(parsed_response[:data][:attributes].keys).to eq(%i[email api_key])
+        expect(parsed_response[:data][:attributes][:email]).to be_a(String)
         expect(parsed_response[:data][:attributes][:api_key]).to be_a(String)
       end
     end
@@ -43,7 +43,7 @@ require 'rails_helper'
       it 'fails to login without email' do
         headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
         user_params = {
-          "username": 'ben@ben.com',
+          "email": 'ben@ben.com',
           "password": "ben123",
           "password_confirmation": "ben123",
           "api_key": "key123"
@@ -63,7 +63,7 @@ require 'rails_helper'
       it 'fails to login without password' do
         headers = { 'Content-Type' => 'application/json' }
         user_params = {
-          "username": 'ben@ben.com',
+          "email": 'ben@ben.com',
           "password": "ben123",
           "password_confirmation": "ben123",
           "api_key": "key123"
@@ -71,7 +71,7 @@ require 'rails_helper'
         User.create(user_params)
         headers = { 'Content-Type' => 'application/json' }
         session_params = {
-          "username": 'ben@ben.com',
+          "email": 'ben@ben.com',
         }
 
         post api_v1_sessions_path, headers: headers, params: session_params.to_json
