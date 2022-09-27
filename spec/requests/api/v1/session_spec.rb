@@ -15,7 +15,7 @@ require 'rails_helper'
         headers = { 'Content-Type' => 'application/json' }
         session_params = {
           "email": 'ben@ben.com',
-          "password": "ben123",
+          "password": "ben123"
         }
         post api_v1_sessions_path, headers: headers, params: session_params.to_json
 
@@ -60,6 +60,27 @@ require 'rails_helper'
         expect(response.status).to eq(401)
       end
 
+      it 'fails to login with incorrect email' do
+        headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
+        user_params = {
+          "email": 'ben@ben.com',
+          "password": "ben123",
+          "password_confirmation": "ben123",
+          "api_key": "key123"
+        }
+        User.create(user_params)
+        headers = { 'Content-Type' => 'application/json' }
+        session_params = {
+          "email": 'NOTben@ben.com',
+          "password": "ben123"
+        }
+
+        post api_v1_sessions_path, headers: headers, params: session_params.to_json
+
+        expect(response).to_not be_successful
+        expect(response.status).to eq(401)
+      end
+
       it 'fails to login without password' do
         headers = { 'Content-Type' => 'application/json' }
         user_params = {
@@ -72,6 +93,26 @@ require 'rails_helper'
         headers = { 'Content-Type' => 'application/json' }
         session_params = {
           "email": 'ben@ben.com',
+        }
+
+        post api_v1_sessions_path, headers: headers, params: session_params.to_json
+
+        expect(response).to_not be_successful
+        expect(response.status).to eq(401)
+      end
+      it 'fails to login with the incorrect password' do
+        headers = { 'Content-Type' => 'application/json' }
+        user_params = {
+          "email": 'ben@ben.com',
+          "password": "ben123",
+          "password_confirmation": "ben123",
+          "api_key": "key123"
+        }
+        User.create(user_params)
+        headers = { 'Content-Type' => 'application/json' }
+        session_params = {
+          "email": 'ben@ben.com',
+          "password": "321"
         }
 
         post api_v1_sessions_path, headers: headers, params: session_params.to_json

@@ -8,5 +8,5 @@ class Api::V1::SessionsController < ApplicationController
       render(json: { message: "User email or password is invalid." }, status: 401)
     end
   end
-  
+
 end
