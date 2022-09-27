@@ -5,7 +5,7 @@ RSpec.describe 'Users Endpoint' do
     it 'Posts a new user to the database' do
       headers = { 'CONTENT_TYPE' => 'application/json', "Accept" => 'application/json' }
       user_params = {
-        "username": 'ben@ben.com',
+        "email": 'ben@ben.com',
         "password": "ben123",
         "password_confirmation": "ben123"
       }
@@ -26,9 +26,9 @@ RSpec.describe 'Users Endpoint' do
       expect(data[:id]).to be_a String
       expect(data).to have_key(:attributes)
       expect(data[:attributes]).to be_a Hash
-      expect(data[:attributes]).to have_key(:username)
+      expect(data[:attributes]).to have_key(:email)
       expect(data[:attributes]).to have_key(:api_key)
-      expect(data[:attributes][:username]).to be_a String
+      expect(data[:attributes][:email]).to be_a String
       expect(data[:attributes][:api_key]).to be_a String
 
     end
@@ -52,7 +52,7 @@ RSpec.describe 'Users Endpoint' do
     it 'fails to create user without password' do
       headers = { 'CONTENT_TYPE' => 'application/json', "Accept" => 'application/json' }
       user_params = {
-        "username": 'ben@ben.com',
+        "email": 'ben@ben.com',
       }
 
 
@@ -66,7 +66,7 @@ RSpec.describe 'Users Endpoint' do
     it 'fails to create user if password confirmation fails' do
       headers = { 'CONTENT_TYPE' => 'application/json', "Accept" => 'application/json' }
       user_params = {
-        "username": 'ben@ben.com',
+        "email": 'ben@ben.com',
         "password": "ben123",
         "password_confirmation": "321"
       }
@@ -81,7 +81,7 @@ RSpec.describe 'Users Endpoint' do
 
     it 'fails to create user if no JSON body is sent' do
       user_params = {
-        "username": 'ben@ben.com',
+        "email": 'ben@ben.com',
         "password": "ben123",
         "password_confirmation": "ben123"
       }
