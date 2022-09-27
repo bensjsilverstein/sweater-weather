@@ -49,7 +49,7 @@ group :test do
   gem 'simplecov'
   gem 'shoulda-matchers'
   gem 'capybara'
-  gem 'launchy' # save_and_open_page
+  gem 'launchy'
   gem 'orderly'
   gem 'vcr'
   gem 'webmock'
