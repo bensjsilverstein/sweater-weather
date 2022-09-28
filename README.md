@@ -1,7 +1,7 @@
 ## Project Description
-Build a backend application to plan road trips that will allow users to see the current weather as well as the forecasted weather at the destination.
+The purpose of this project was to build a backend application to plan road trips that will allow users to see the current weather as well as the forecasted weather at their ending destination.
 
-Your team is working in a service-oriented architecture. The front-end will communicate with your back-end through an API. Your job is to expose that API that satisfies the front-end team’s requirements.
+This app is built using service-oriented architecture. A front-end team or application can communicate with the back-end through the use of this API. The purpose of this project is to expose an API that satisfies a set of provided requirements for a front-end team.
 
 ## Learning Goals
 - Expose an API that aggregates data from multiple external APIs
