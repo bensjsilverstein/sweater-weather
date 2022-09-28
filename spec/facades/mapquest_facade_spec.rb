@@ -7,5 +7,11 @@ RSpec.describe MapquestFacade do
 
     expect(location).to be_a(Location)
   end
-  
+
+  it "returns a route", :vcr do
+    route = MapquestFacade.get_route('Denver, CO', 'Orland, FL')
+
+    expect(route).to be_a RoadTrip
+  end
+
 end
