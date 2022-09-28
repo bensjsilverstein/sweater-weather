@@ -11,22 +11,23 @@ class WeatherFacade
 
   def self.get_daily_weather(coords)
     parsed = WeatherService.get_weather(coords)
-    parsed[:daily][0..4].map do |weather|
+    parsed[:daily].map do |weather|
       DailyWeather.new(weather)
     end
   end
 
   def self.get_hourly_weather(coords)
     parsed = WeatherService.get_weather(coords)
-    parsed[:hourly].take(8).map do |weather|
+    parsed[:hourly].map do |weather|
       HourlyWeather.new(weather)
     end
   end
 
   def self.create_forecast(location)
-    parsed_json = WeatherService.get_weather(location)
+    location = MapquestFacade.get_coords(location)
+    weather = WeatherService.get_weather(location)
 
-    Forecast.create_forecast(parsed_json)
+    Forecast.create_forecast(weather)
   end
 
   # def self.forecast(coords)

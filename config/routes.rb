@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get '/forecast', to: 'forecast#index'
       resources :users
       resources :sessions
+      resources :road_trips
     end
   end
 end

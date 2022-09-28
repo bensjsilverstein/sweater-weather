@@ -5,4 +5,10 @@ class MapquestFacade
     Location.new(result)
   end
 
+  def self.get_route(start = '', final = '')
+    route_info = MapquestService.get_route(start, final)
+
+    RoadTrip.new(route_info)
+  end
+
 end
